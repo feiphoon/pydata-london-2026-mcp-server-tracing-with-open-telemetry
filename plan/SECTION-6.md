@@ -2,9 +2,6 @@
 
 ## Three problems with `nook-mcp`'s beautiful traces
 
-We ended §5 with three uncomfortable facts about the trace stream we
-just built. Each has a fix that lives in the **OTel Collector** — we deliberately put in place in §1:
-
 | Problem (from §5)                                                          | Production control                          |
 |----------------------------------------------------------------------------|---------------------------------------------|
 | Spans carry **visitor names** from `island-visitors` records → PII risk    | Redaction (app hash + Collector OTTL)       |

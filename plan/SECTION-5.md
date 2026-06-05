@@ -2,7 +2,7 @@
 
 ## One trace tells a story. Tom Nook tells thousands
 
-At the end of §4 we left four questions on the screen:
+We now have questions:
 
 1. *Which tool is the most expensive in pounds?*
 2. *What is the p99 latency of `quote_upgrade` over the last hour?*
