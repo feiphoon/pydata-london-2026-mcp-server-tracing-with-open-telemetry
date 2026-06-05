@@ -195,7 +195,6 @@ Tom Nook exposes 16 tools:
   - get_todays_catch: Return the player's catches from today with their names, types and sell values.
   - shake_tree: Shake a tree and see what falls out.
   - ... (multiplier and red-herring tools) ...
-  - latest_quote: Return Tom Nook's most recent home-upgrade quote, or None if none exist.
 
 He is watching 4 topics: ['abd-balance', 'catch-log', 'home-upgrade-quotes',
                           'island-visitors']
@@ -212,10 +211,10 @@ Quote: 14,203,456 Bells
 
 ### What to look for
 
-- The **docstring** of `latest_quote` is what an LLM client would
+- The **docstring** of `shake_tree` is what an LLM client would
   read in `tools/list` to decide when to call it. Treat docstrings as
   prompts, not just documentation
-- The signature `() -> dict | None` is enough for FastMCP to generate
+- The signature `(str) -> dict` is enough for FastMCP to generate
   the JSON Schema for parameters (empty object) and the return shape
 - You did **not** touch `kafka_client.py`. The split between
   protocol-level code (FastMCP), tool logic (`tools.py`) and
