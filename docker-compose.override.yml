@@ -1,0 +1,67 @@
+# Override file that completes the workshop stack on top of the Lenses CE base.
+#
+# The upstream lenses-mcp service is gated behind the 'with-lenses-mcp'
+# profile in docker-compose.yml, so this file is free to introduce its own
+# 'nook-mcp' on the same host port (8000) without conflict.
+#
+# Services added here:
+#   - nook-mcp       : the workshop's custom MCP server (built from ./mcp)
+#   - nook-seeder    : produces synthetic Animal Crossing data into Kafka
+#   - otel-collector : OTLP receiver, forwards spans to Jaeger
+#   - jaeger         : trace UI on http://localhost:16686
+#
+# Bring everything up with:
+#     ACCEPT_EULA=true docker compose up --build
+
+services:
+  nook-mcp:
+    build:
+      context: ./mcp
+    pull_policy: build
+    environment:
+      KAFKA_BOOTSTRAP: demo-kafka:19092
+      OTEL_SERVICE_NAME: nook-mcp
+      OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+      OTEL_EXPORTER_OTLP_PROTOCOL: http/protobuf
+      OLLAMA_BASE_URL: http://host.docker.internal:11434
+      OLLAMA_MODEL: qwen3.5:0.8b
+    extra_hosts:
+      - "host.docker.internal:host-gateway" # so the container can reach host Ollama
+    depends_on:
+      demo-kafka:
+        condition: service_started
+    ports:
+      - 8000:8000
+
+  nook-seeder:
+    build:
+      context: .
+      dockerfile: seed/Dockerfile
+    pull_policy: build
+    environment:
+      KAFKA_BOOTSTRAP: demo-kafka:19092
+    depends_on:
+      demo-kafka:
+        condition: service_started
+    restart: unless-stopped
+
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.110.0
+    command: ["--config=/etc/otel-collector-config.yaml"]
+    volumes:
+      - ./observability/otel-collector-config.yaml:/etc/otel-collector-config.yaml:ro
+    ports:
+      - 4317:4317  # OTLP gRPC (for SDKs configured to use gRPC)
+      - 4318:4318  # OTLP HTTP (default for the workshop)
+    depends_on:
+      jaeger:
+        condition: service_started
+
+  jaeger:
+    image: jaegertracing/all-in-one:1.62.0
+    environment:
+      COLLECTOR_OTLP_ENABLED: "true"
+    ports:
+      - 16686:16686  # Jaeger UI
+    # The collector reaches Jaeger's OTLP gRPC port at jaeger:4317 over the
+    # internal 'lenses' network; no need to expose it to the host.

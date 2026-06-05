@@ -1,0 +1,16 @@
+[
+  { "stage": "Tent", "cost__bells": 49800, "percentage_of_lifetime_cost": 0.40 },
+  { "stage": "House construction", "cost__bells": 98000, "percentage_of_lifetime_cost": 0.79 },
+  { "stage": "Main room expansion", "cost__bells": 198000, "percentage_of_lifetime_cost": 1.60 },
+  { "stage": "Back room", "cost__bells": 348000, "percentage_of_lifetime_cost": 2.82 },
+  { "stage": "Left room", "cost__bells": 548000, "percentage_of_lifetime_cost": 4.44 },
+  { "stage": "Right room", "cost__bells": 758000, "percentage_of_lifetime_cost": 6.14 },
+  { "stage": "Second floor", "cost__bells": 1248000, "percentage_of_lifetime_cost": 10.11 },
+  { "stage": "Basement", "cost__bells": 2498000, "percentage_of_lifetime_cost": 20.23 },
+  { "stage": "First storage expansion", "cost__bells": 500000, "percentage_of_lifetime_cost": 4.05 },
+  { "stage": "Second storage expansion", "cost__bells": 700000, "percentage_of_lifetime_cost": 5.67 },
+  { "stage": "Third storage expansion", "cost__bells": 900000, "percentage_of_lifetime_cost": 7.29 },
+  { "stage": "Fourth storage expansion", "cost__bells": 1200000, "percentage_of_lifetime_cost": 9.72 },
+  { "stage": "Fifth storage expansion", "cost__bells": 1500000, "percentage_of_lifetime_cost": 12.15 },
+  { "stage": "Sixth storage expansion", "cost__bells": 1800000, "percentage_of_lifetime_cost": 14.58 }
+]

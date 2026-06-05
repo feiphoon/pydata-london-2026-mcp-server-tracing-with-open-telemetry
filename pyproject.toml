@@ -1,0 +1,33 @@
+[project]
+name = "pydata-london-2026-mcp-telemetry"
+version = "0.1.0"
+description = "MCP Telemetry workshop"
+readme = "README.md"
+requires-python = ">=3.14.4"
+authors = [{ name = "Fei Phoon" }, { name = "Tun Shwe" }]
+license = { text = "MIT" }
+dependencies = [
+    "fastmcp==3.2.3",
+]
+
+[dependency-groups]
+dev = [
+    "invoke>=2.2.1,<3.0.0",
+    "pre-commit>=4.5.1,<5.0.0",
+    "ruff>=0.14.14,<1.0.0",
+]
+
+# Notebook environment for `notebooks/workshop.ipynb`. Kept out of the
+# default dependencies so `uv sync` for the MCP server stays minimal.
+notebook = [
+    "jupyterlab>=4.2,<5.0",
+    "ipykernel>=6.29,<7.0",
+    "pandas>=2.2,<3.0",
+]
+
+[tool.ruff]
+line-length = 120
+exclude = []
+
+[tool.setuptools.packages.find]
+where = ["src"]
