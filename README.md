@@ -1,9 +1,7 @@
 # Observing Agentic AI in Production: MCP Server Tracing with OpenTelemetry and Animal Crossing
 
 Workshop materials for **"Observing Agentic AI in Production: MCP Server
-Tracing with OpenTelemetry"** at PyData London 2026.
-
-The context:
+Tracing with OpenTelemetry and Animal Crossing"** at PyData London 2026.
 
 **Tom Nook** 🦝 is a mysterious monopolist who seems to be omnipresent on all Animal Crossing Islands and in all financial dealings. He runs Nook Inc, Resident Services & Infrastructure at the Town Hall, and what is effectively the island bank (the currency is **Bells** 🔔💰), and his unsettling twin sons run the island's main shop, Nook's Cranny. It just seems to be very much *all in the family*.
 
@@ -18,7 +16,7 @@ To power it, we're building him an MCP-powered AI agent backed by a private Kafk
 Unfortunately TANUKI's overzealous fleecing is starting to anger players, and we will need
 to find out where it all goes wrong. It even makes you *write a plea explaining why you deserve the upgrade* before it prices you — and somehow that makes the bill go *up*?!
 
-Over 90 minutes we'll stand up the full stack, build the MCP server, instrument it with OpenTelemetry, and use the traces to watch TANUKI work.
+Over 90 minutes we'll stand up the full stack, instrument Nook MCP with OpenTelemetry, and use the traces to watch TANUKI work.
 
 | Path                              | Purpose                                                       |
 | --------------------------------- | ------------------------------------------------------------- |
@@ -30,6 +28,7 @@ Over 90 minutes we'll stand up the full stack, build the MCP server, instrument 
 | `mcp/src/nook_mcp/kafka_client.py`| Async helpers around aiokafka.           |
 | `seed/`                           | Continuous producer of Animal Crossing themed Kafka records.  |
 | `observability/`                  | OTel Collector configuration (Jaeger + debug exporter).       |
+| `workshop/`                       | Section walkthroughs of the workshop, including the presentation slides.    |
 
-Note: The Lenses MCP server `lensesio/mcp:6.2` service is overridden by Nook MCP and is gated behind a compose profile so it can still be run for reference:
+Note: The default Lenses MCP server `lensesio/mcp:6.2` service is overridden by Nook MCP and is gated behind a compose profile so it can still be run for reference:
 `ACCEPT_EULA=true docker compose --profile with-lenses-mcp up`.
